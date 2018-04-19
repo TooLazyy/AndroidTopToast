@@ -52,7 +52,7 @@ val toast = topToast {
         }
 ```
 
-###Params
+### Params
 
 1. `duration` - duration of toast before autoremove, set to `TopToast.NO_AUTO_REMOVE` to disable autoremove
 2. `toastGravity` - gravity on screen (`TopToast.TOASTGRAVITY.TOP` or `TopToast.TOASTGRAVITY.BOTTOM`)
