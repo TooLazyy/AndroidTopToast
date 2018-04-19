@@ -4,9 +4,6 @@ Library allows to show top toast (like Snackbar view).
 ### Screenshots
 ---
 
-<img align="left" width="150" height="300" src="https://github.com/TooLazyy/AndroidTopToast/blob/master/screenshots/toast6.jpg">
-
-
 | Simple toast  | Custom colors   | Bottom gravity|
 | :------------: |:---------------:| :-------------:|
 |          <img align="left" width="150" height="300" src="https://github.com/TooLazyy/AndroidTopToast/blob/master/screenshots/toast6.jpg">     | <img align="left" width="150" height="300" src="https://github.com/TooLazyy/AndroidTopToast/blob/master/screenshots/toast5.jpg"> | <img align="left" width="150" height="300" src="https://github.com/TooLazyy/AndroidTopToast/blob/master/screenshots/toast4.jpg"> 		  |
