@@ -145,20 +145,27 @@ class TopToast(
 
     private fun createLayoutParams() {
         mLayoutParams = WindowManager.LayoutParams()
+
         mLayoutParams!!.gravity = mGravity.gravityValue or Gravity.START
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mLayoutParams!!.type = WindowManager.LayoutParams.TYPE_APPLICATION_PANEL
-        } else {
-            mLayoutParams!!.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR
-        }
+
         mLayoutParams!!.flags =
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
 
-        if (mAboveStatusBar) {
-            mLayoutParams!!.token = (mContext as Activity).window.decorView.windowToken
-            mLayoutParams!!.flags = mLayoutParams!!.flags or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (mAboveStatusBar) {
+                mLayoutParams!!.type = WindowManager.LayoutParams.TYPE_APPLICATION_PANEL
+            } else {
+                mLayoutParams!!.type = WindowManager.LayoutParams.TYPE_APPLICATION
+            }
+        } else {
+            mLayoutParams!!.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR
+            if (mAboveStatusBar) {
+                mLayoutParams!!.token = (mContext as Activity).window.decorView.windowToken
+                mLayoutParams!!.flags = mLayoutParams!!.flags or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+            }
         }
+
         mLayoutParams!!.width = WindowManager.LayoutParams.MATCH_PARENT
         mLayoutParams!!.height = WindowManager.LayoutParams.WRAP_CONTENT
     }
