@@ -28,6 +28,30 @@ val topToast {
 ```
 To show toast use `topToast.showTopToas()`, to remove - `toast.removeTopToast()`
 
+
+Full parameters:
+```
+val toast = topToast {
+            duration = 3000
+			toastGravity = TopToast.TOASTGRAVITY.BOTTOM
+            removeOnSwipe = TopToast.TOASTSWIPE.TOP
+            context = this@MainActivity
+            showAboveStatusBar = true
+            viewSettings {
+				//gonna be ignored
+				textColor = Color.RED
+				//gonna be ignored
+				backgroundColor = Color.BLACK
+				//gonna be ignored
+				textToShow = "text"
+				//gonna be ignored
+				layoutId = R.layout.my_awesome_toast
+				//gonna be used (max priority)
+                customView = custom
+            }
+        }
+```
+
 ###Params
 
 1. `duration` - duration of toast before autoremove, set to `TopToast.NO_AUTO_REMOVE` to disable autoremove
