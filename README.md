@@ -66,7 +66,7 @@ val toast = topToast {
 6.4 `layoutId` - layout resource id.
 6.5 `customView` - custom `View`.
 
-###Changes
+### Changes
 Now `viewSettings` contains parameter `type` of type `TOAS_TYPE`.
 Possible values - `DEFAULT`, `CUSTOM_VIEW`, `CUSTOM_VIEW_ID`.
 If `DEFAULT` is set - `layoutId` and `customView` gonna be **IGNORED**.
