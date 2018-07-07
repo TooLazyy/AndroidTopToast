@@ -8,13 +8,13 @@ import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import android.view.WindowManager
-import ru.galt.toastlibrary.data.ToastViewSettings
+import ru.galt.toastlibrary.builders.TOAST_TYPE
+import ru.galt.toastlibrary.data.ToastViewParams
 import ru.galt.toastlibrary.views.TopToastView
 import java.lang.ref.WeakReference
 
 class TopToast(
-        viewSettings: ToastViewSettings,
-        duration: Long,
+        viewSettings: ToastViewParams,
         context: Context,
         aboveStatusBar: Boolean,
         gravity: TOASTGRAVITY,
@@ -30,8 +30,6 @@ class TopToast(
     //weak reference to view
     var mToastView: WeakReference<TopToastView>? = null
         private set
-    //on screen duration
-    var mDuration = duration
     private val mContext = context
     var mAboveStatusBar = aboveStatusBar
     //top or borrom gravity
@@ -39,7 +37,7 @@ class TopToast(
     //swipe to remove direction
     var mToastSwipe: TOASTSWIPE = swipe
     //view settings
-    var mViewSettings: ToastViewSettings = viewSettings
+    var mViewSettings: ToastViewParams = viewSettings
 
     private var mLayoutParams: WindowManager.LayoutParams? = null
     private var mSwipeListener = OnSwipeListener(context).apply {
@@ -77,7 +75,7 @@ class TopToast(
     }
 
     private fun init() {
-        if (mViewSettings.useCustomViewId.not()) {
+        if (mViewSettings.type == TOAST_TYPE.DEFAULT) {
             mViewSettings.layoutId = defaultViewId
         }
     }
@@ -116,12 +114,12 @@ class TopToast(
         }
 
         //if default toast view, set text and bg color
-        if (mViewSettings.useCustomViewId.not()) {
+        if (mViewSettings.layoutId == defaultViewId) {
             mToastView?.get()?.setBgColor(mViewSettings.bgColor)
             mToastView?.get()?.setText(mViewSettings.text)
         }
 
-        if (mDuration != NO_AUTO_REMOVE) {
+        if (mViewSettings.duration != NO_AUTO_REMOVE) {
             startRemoveTimer()
         }
     }
@@ -140,7 +138,7 @@ class TopToast(
 
     private fun startRemoveTimer() {
         mHandler.removeCallbacksAndMessages(null)
-        mHandler.postDelayed(mRemoveRunnable, mDuration)
+        mHandler.postDelayed(mRemoveRunnable, mViewSettings.duration)
     }
 
     private fun createLayoutParams() {

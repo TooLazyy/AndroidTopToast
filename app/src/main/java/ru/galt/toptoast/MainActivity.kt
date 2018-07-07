@@ -3,15 +3,12 @@ package ru.galt.toptoast
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.widget.Button
 import ru.galt.toastlibrary.TopToast
+import ru.galt.toastlibrary.builders.TOAST_TYPE
 import ru.galt.toastlibrary.builders.topToast
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var toast: TopToast
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +46,6 @@ class MainActivity : AppCompatActivity() {
      */
     private fun showToastWithAutoRemove() {
         topToast {
-            duration = 2000L
             context = this@MainActivity
             showAboveStatusBar = false
         }.showTopToast()
@@ -61,10 +57,12 @@ class MainActivity : AppCompatActivity() {
      */
     private fun showToastWithAutoRemoveOrSwipe() {
         topToast {
-            duration = 2000L
             removeOnSwipe = TopToast.TOASTSWIPE.TOP
             context = this@MainActivity
             showAboveStatusBar = false
+            viewSettings {
+                duration = 3000L
+            }
         }.showTopToast()
     }
 
@@ -74,11 +72,11 @@ class MainActivity : AppCompatActivity() {
      */
     private fun showToastWithAutoRemoveCustomColorsAndText() {
         topToast {
-            duration = 2000L
             removeOnSwipe = TopToast.TOASTSWIPE.TOP
             context = this@MainActivity
             showAboveStatusBar = false
             viewSettings {
+                duration = 3000L
                 textToShow = "showToastWithAutoRemoveCustomColorsAndText"
                 textColor = Color.WHITE
                 backgroundColor = Color.BLACK
@@ -92,12 +90,12 @@ class MainActivity : AppCompatActivity() {
      */
     private fun showToastWithAutoRemoveCustomColorsAndTextBottom() {
         topToast {
-            duration = 2000L
             removeOnSwipe = TopToast.TOASTSWIPE.TOP
             context = this@MainActivity
             showAboveStatusBar = false
             toastGravity = TopToast.TOASTGRAVITY.BOTTOM
             viewSettings {
+                duration = 3000L
                 textToShow = "showToastWithAutoRemoveCustomColorsAndText"
                 textColor = Color.WHITE
                 backgroundColor = Color.BLACK
@@ -111,11 +109,11 @@ class MainActivity : AppCompatActivity() {
      */
     private fun showToastWithSwipeToRemoveOnly() {
         topToast {
-            duration = TopToast.NO_AUTO_REMOVE
             removeOnSwipe = TopToast.TOASTSWIPE.TOP
             context = this@MainActivity
             showAboveStatusBar = false
             viewSettings {
+                duration = 3000L
                 textToShow = "showToastWithAutoRemoveCustomColorsAndText"
                 textColor = Color.WHITE
                 backgroundColor = Color.BLACK
@@ -129,11 +127,11 @@ class MainActivity : AppCompatActivity() {
      */
     private fun showToastWithSwipeToRemoveOnlyAbove() {
         topToast {
-            duration = TopToast.NO_AUTO_REMOVE
             removeOnSwipe = TopToast.TOASTSWIPE.TOP
             context = this@MainActivity
             showAboveStatusBar = true
             viewSettings {
+                duration = 3000L
                 textToShow = "showToastWithAutoRemoveCustomColorsAndText"
                 textColor = Color.WHITE
                 backgroundColor = Color.BLACK
@@ -149,19 +147,18 @@ class MainActivity : AppCompatActivity() {
     private fun showToastWithCustomLayout() {
         val custom = layoutInflater.inflate(R.layout.custom_toast, null)
         val toast = topToast {
-            duration = 3000
             removeOnSwipe = TopToast.TOASTSWIPE.TOP
             context = this@MainActivity
             showAboveStatusBar = true
             viewSettings {
+                type = TOAST_TYPE.CUSTOM_VIEW
                 customView = custom
             }
         }
-        toast.showTopToast()
-
         custom.findViewById<Button>(R.id.btn).setOnClickListener {
             toast.removeTopToast()
         }
+        toast.showTopToast()
     }
 
     /**
@@ -170,10 +167,10 @@ class MainActivity : AppCompatActivity() {
      */
     private fun showToastWithCustomLayoutId() {
         val toast = topToast {
-            duration = 3000
             context = this@MainActivity
             showAboveStatusBar = true
             viewSettings {
+                type = TOAST_TYPE.CUSTOM_VIEW_ID
                 layoutId = R.layout.custom_toast2
             }
         }
