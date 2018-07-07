@@ -20,7 +20,6 @@ Library allows to show top toast (like Snackbar view).
 Use `Kotlin DSL` to create `TopToast` instance:
 ```
 val topToast {
-            duration = 2000L
             removeOnSwipe = TopToast.TOASTSWIPE.TOP
             context = this@MainActivity
             showAboveStatusBar = false
@@ -32,12 +31,13 @@ To show toast use `topToast.showTopToas()`, to remove - `toast.removeTopToast()`
 Full parameters:
 ```
 val toast = topToast {
-            duration = 3000
-			toastGravity = TopToast.TOASTGRAVITY.BOTTOM
+	    toastGravity = TopToast.TOASTGRAVITY.BOTTOM
             removeOnSwipe = TopToast.TOASTSWIPE.TOP
             context = this@MainActivity
             showAboveStatusBar = true
             viewSettings {
+	    			duration = 3000L
+	    			type = TOAST_TYPE.DEFAULT
 				//gonna be ignored
 				textColor = Color.RED
 				//gonna be ignored
@@ -63,5 +63,11 @@ val toast = topToast {
 6.1  `textColor` - default text color (`WHITE`)
 6.2 `backgroundColor` - default bg color (`RED`)
 6.3 `textToShow` - text to show
-6.4 `layoutId` - layout resource id. **IMPORTANT** - if  `layoutId` parameter is set, **6.1-6.3** parameters gonna be ignored
-6.5 `customView` - custom `View`. **IMPORTANT** - if  `customView` parameter is set, **6.1-6.4** parameters gonna be ignored
+6.4 `layoutId` - layout resource id.
+6.5 `customView` - custom `View`.
+
+###Changes
+Now `viewSettings` contains parameter `type` of type `TOAS_TYPE`.
+Possible values - `DEFAULT`, `CUSTOM_VIEW`, `CUSTOM_VIEW_ID`.
+If `DEFAULT` is set - `layoutId` and `customView` gonna be **IGNORED**.
+If `layoutId` or `customView` are set, specify a appropriate `type` (default value is `DEFAULT`).
